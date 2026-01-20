@@ -13,9 +13,9 @@ public class BrowserConfig
         _playwright = await Playwright.CreateAsync();
         _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
-            Headless = false
+            Headless = true
         });
-        
+
         var context = await _browser.NewContextAsync();
         Page = await context.NewPageAsync();
     }
@@ -26,12 +26,12 @@ public class BrowserConfig
         {
             await Page.CloseAsync();
         }
-        
+
         if (_browser != null)
         {
             await _browser.CloseAsync();
         }
-        
+
         _playwright?.Dispose();
     }
 }
