@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>POC Testing - Usuarios</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <h1>Crear Usuario</h1>
+
+    <form id="user-form">
+        <h2>Información Personal</h2>
+        
+        <label>
+            Nombre:
+            <input type="text" id="name" />
+        </label>
+
+        <label>
+            Email:
+            <input type="email" id="email" />
+        </label>
+
+        <label>
+            Edad:
+            <input type="number" id="age" />
+        </label>
+
+        <label>
+            Teléfono:
+            <input type="tel" id="phone" />
+        </label>
+
+        <label>
+            Dirección:
+            <input type="text" id="address" />
+        </label>
+
+        <label>
+            País/Ciudad:
+            <select id="country">
+                <option value="">Seleccionar...</option>
+                <option value="mexico">México</option>
+                <option value="colombia">Colombia</option>
+                <option value="argentina">Argentina</option>
+                <option value="españa">España</option>
+                <option value="otro">Otro</option>
+            </select>
+        </label>
+
+        <label>
+            Género:
+            <div id="gender-options">
+                <label><input type="radio" name="gender" value="masculino" /> Masculino</label>
+                <label><input type="radio" name="gender" value="femenino" /> Femenino</label>
+                <label><input type="radio" name="gender" value="otro" /> Otro</label>
+            </div>
+        </label>
+
+        <label>
+            Fecha de nacimiento:
+            <input type="date" id="birthDate" />
+        </label>
+
+        <h2>Información Profesional</h2>
+
+        <label>
+            Empresa/Compañía:
+            <input type="text" id="company" />
+        </label>
+
+        <label>
+            Puesto de trabajo:
+            <input type="text" id="position" />
+        </label>
+
+        <label>
+            Experiencia (años):
+            <input type="number" id="experience" min="0" />
+        </label>
+
+        <label>
+            Idiomas:
+            <div id="languages-options">
+                <label><input type="checkbox" name="language" value="español" /> Español</label>
+                <label><input type="checkbox" name="language" value="inglés" /> Inglés</label>
+                <label><input type="checkbox" name="language" value="francés" /> Francés</label>
+                <label><input type="checkbox" name="language" value="portugués" /> Portugués</label>
+                <label><input type="checkbox" name="language" value="mandarin" /> Mandarín</label>
+            </div>
+        </label>
+
+        <label>
+            Salario esperado (rango):
+            <input type="range" id="salary" min="0" max="200000" step="5000" value="50000" />
+            <span id="salary-display">$50,000</span>
+        </label>
+
+        <label>
+            Disponibilidad:
+            <select id="availability">
+                <option value="">Seleccionar...</option>
+                <option value="inmediata">Inmediata</option>
+                <option value="2-semanas">2 semanas</option>
+                <option value="1-mes">1 mes</option>
+                <option value="2-meses">2 meses</option>
+            </select>
+        </label>
+
+        <label>
+            Tipo de contrato:
+            <div id="contract-type-options">
+                <label><input type="radio" name="contractType" value="tiempo-completo" /> Tiempo completo</label>
+                <label><input type="radio" name="contractType" value="medio-tiempo" /> Medio tiempo</label>
+                <label><input type="radio" name="contractType" value="freelance" /> Freelance</label>
+                <label><input type="radio" name="contractType" value="temporal" /> Temporal</label>
+            </div>
+        </label>
+
+        <label>
+            Foto/Avatar:
+            <input type="file" id="avatar" accept="image/*" />
+        </label>
+
+        <label>
+            Descripción/Biografía:
+            <textarea id="bio" rows="4" cols="50" placeholder="Cuéntanos sobre ti..."></textarea>
+        </label>
+
+        <label>
+            Skills/Habilidades (separadas por comas):
+            <input type="text" id="skills" placeholder="JavaScript, Python, SQL, ..." />
+        </label>
+
+        <h2>Consentimientos</h2>
+
+        <label>
+            <input type="checkbox" id="terms" />
+            Acepto los términos y condiciones
+        </label>
+
+        <label>
+            <input type="checkbox" id="newsletter" />
+            Deseo recibir newsletter
+        </label>
+
+        <button type="submit">Crear</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend simple para pruebas E2E.",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx http-server -p 3000"
+  },
+  "keywords": [],
+  "author": "Pérez Medina Salvador",
+  "license": "ISC"
+}

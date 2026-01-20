@@ -1,0 +1,24 @@
+# Requisitos del Sistema
+
+## Software Necesario
+- .NET SDK 8.0.416
+- Node.js 18.x o superior
+- npm 9.x o superior
+- VS Code (opcional)
+
+## Dependencias .NET (instaladas con `dotnet restore`)
+- Microsoft.Playwright 1.57.0
+- xunit 2.8.1
+- xunit.runner.visualstudio 2.5.6
+- Microsoft.NET.Test.Sdk 17.11.1
+- Microsoft.Bcl.AsyncInterfaces 8.0.0
+- Newtonsoft.Json 13.0.3
+
+## Dependencias Frontend (instaladas con `npm install`)
+- http-server
+
+## Verificación rápida
+```bash
+dotnet --version   # Debe mostrar: 8.0.416
+node --version     # Debe ser: v18.x.x o superior
+npm --version      # Debe ser: 9.x.x o superior
