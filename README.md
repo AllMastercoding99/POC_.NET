@@ -8,6 +8,7 @@
 5. [Patrones Utilizados](#patrones-utilizados)
 6. [¿Cómo agregar una nueva prueba?](#cómo-agregar-una-nueva-prueba)
 7. [Iniciando el Proyecto Localmente](#iniciando-el-proyecto-localmente)
+8. [Ejecución y Visualización de Resultados](#ejecución-y-visualización-de-resultados)
 
 ---
 
@@ -32,7 +33,7 @@
 
 ## Componentes Principales
 
-- **BrowserConfig.cs:** Gestión y configuración del navegador.
+- **BrowserConfig.cs:** Gestión y configuración del navegador (Playwright, modo headless por defecto).
 - **UserFormPage.cs:** Page Object Model para el formulario de usuario.
 - **ValidationTests.cs:** Pruebas de validación de formulario.
 - **UserCreationTests.cs:** Pruebas de creación de usuario.
@@ -61,7 +62,7 @@ Inicio
   │   ├─ new BrowserConfig()
   │   ├─ _browserConfig.InitializeAsync()
   │   │   ├─ Crear Playwright
-  │   │   ├─ Lanzar Chrome
+  │   │   ├─ Lanzar Chromium (headless)
   │   │   └─ Abrir http://localhost:3000
   │   └─ _userFormPage = new UserFormPage(_browserConfig.Page)
   │
@@ -93,7 +94,7 @@ public class ValidationTests : IAsyncLifetime
     // IAsyncLifetime significa:
     // - InitializeAsync(): se llama ANTES
     // - DisposeAsync(): se llama DESPUÉS
-    // - Automático para cada [Fact]
+    // - Automático para cada [Fact] o [Theory]
 }
 ```
 
@@ -172,9 +173,9 @@ Abre tu navegador en: [http://localhost:3000](http://localhost:3000)
 ### 2. Ejecutar las Pruebas Automatizadas (.NET)
 
 ```bash
-cd dotnet-tests
+cd dotnet-tests/POCTests
 dotnet restore
-dotnet test
+dotnet test --logger "trx;LogFileName=test-results.trx"
 ```
 
 ---
@@ -189,10 +190,19 @@ dotnet test
 
 2. **Terminal 2 - Backend Tests:**
    ```bash
-   cd dotnet-tests
+   cd dotnet-tests/POCTests
    dotnet test
    ```
 
-**Nota:** Es importante mantener ambos procesos ejecutándose. El frontend proporciona la interfaz y los tests la validan automáticamente..
+**Nota:** Es importante mantener ambos procesos ejecutándose. El frontend proporciona la interfaz y los tests la validan automáticamente.
+
+---
+
+## Ejecución y Visualización de Resultados
+
+- Los resultados de las pruebas se muestran en la terminal tras ejecutar `dotnet test`.
+- Para un archivo de resultados, se genera `TestResults/test-results.trx` (XML).
+- Para una visualización amigable, se recomienda la extensión **.NET Test Explorer** en Visual Studio Code.
+- No se requiere Python ni herramientas de reporte HTML externas.
 
 ---
