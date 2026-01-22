@@ -6,62 +6,49 @@ using POCTests.Utils;
 
 namespace POCTests.Tests;
 
-public class UserCreationTests : IAsyncLifetime
+/// <summary>
+/// Tests that verify successful user creation through the user form.
+/// </summary>
+public class UserFormCreationTests : TestBase
 {
-    private BrowserConfig _browserConfig = null!;
-    private UserFormPage _userFormPage = null!;
+    /// <summary>
+    /// Provides valid user data for successful creation scenarios.
+    /// </summary>
+    private const string SuccessMessage = "Usuario creado correctamente";
 
-    public async Task InitializeAsync()
+    public static IEnumerable<object[]> ValidUserFormTestCases()
     {
-        _browserConfig = new BrowserConfig();
-        await _browserConfig.InitializeAsync();
-        _userFormPage = new UserFormPage(_browserConfig.Page!);
-    }
-
-    public async Task DisposeAsync()
-    {
-        await _browserConfig.CloseAsync();
-    }
-
-    public static IEnumerable<object[]> UserCreationTestCases()
-    {
-        // Caso exitoso
         var user = UserDataGenerator.GenerateUser();
         yield return new object[]
         {
             user.name, user.email, user.age, user.phone, user.address, user.country, user.gender, user.birthDate,
             user.company, user.position, user.experience, user.languages, user.salary, user.availability,
             user.contractType, user.bio, user.skills, user.acceptTerms, user.subscribeNewsletter,
-            "Usuario creado correctamente"
+            SuccessMessage
         };
     }
 
+    /// <summary>
+    /// Should create a user when all form data is valid.
+    /// </summary>
     [Theory]
-    [MemberData(nameof(UserCreationTestCases))]
-    public async Task ShouldCreateUserSuccessfully(
+    [MemberData(nameof(ValidUserFormTestCases))]
+    public async Task Should_Create_User_When_Form_Data_Is_Valid(
         string name, string email, string age, string phone, string address, string country, string gender, string birthDate,
         string company, string position, string experience, List<string> languages, string salary, string availability,
         string contractType, string bio, string skills, bool acceptTerms, bool subscribeNewsletter, string expectedMessage)
     {
-        // Mock de la API para simular respuesta exitosa
-        await _browserConfig.Page!.RouteAsync("/api/users", async route =>
-        {
-            await route.FulfillAsync(new RouteFulfillOptions
-            {
-                Status = 201,
-                Body = "{\"id\": 1}",
-                ContentType = "application/json"
-            });
-        });
-
+        // Arrange: Navigate to the user form page using BASE_URL from .env
         await _userFormPage.NavigateAsync();
 
+        // Act: Fill the form with valid data and submit
         await _userFormPage.FillCompleteFormAsync(
             name, email, age, phone, address, country, gender, birthDate, company, position, experience, languages,
             salary, availability, contractType, bio, skills, acceptTerms, subscribeNewsletter
         );
         await _userFormPage.SubmitFormAsync();
 
+        // Assert: The expected success message is shown
         var message = await _userFormPage.GetMessageTextAsync();
         Assert.Equal(expectedMessage, message);
     }
