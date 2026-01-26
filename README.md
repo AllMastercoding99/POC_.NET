@@ -125,7 +125,6 @@ public async Task MyTest()
 // We wait for it to fully execute before continuing
 
 await _userFormPage.SubmitFormAsync();  // Waits for click
-await Task.Delay(500);                  // Waits for JS validation
 var message = await _userFormPage.GetMessageTextAsync(); // Get result
 ```
 
@@ -178,7 +177,17 @@ dotnet restore
 dotnet test --logger "trx;LogFileName=test-results.trx"
 ```
 
----
+**Browser and Headless Mode Configuration**
+
+- Place your `.env` file in the `dotnet-tests/POCTests` folder.
+- The test framework will always load `.env` from this location, regardless of your working directory.
+- Example `.env`:
+  ```
+  BROWSER=Chromium
+  HEADLESS=false
+  ```
+- To run tests in a visible browser window, set `HEADLESS=false`.
+- To change the browser, set `BROWSER=Chromium`, `BROWSER=Firefox`, or `BROWSER=WebKit`.
 
 ### Recommended Workflow
 
